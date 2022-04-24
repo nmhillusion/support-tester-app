@@ -34,4 +34,9 @@ class ApplicationTest {
             getLog(this).info("askQuestion: " + askQuestion);
         });
     }
+
+    @Test
+    void testMain() {
+        Application.main(new String[]{"D:/projects/test-case/sample-test-case.txt", "Y"});
+    }
 }
