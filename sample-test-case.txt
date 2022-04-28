@@ -1,0 +1,4 @@
+["app.netlify.nmhillusion.support_tester_app.model.Operator", "add", "multiply", "sum"]
+[[], [2, 3], [12, 8], [[6, 7, 8]]]
+
+[null, 5, 96, 21]

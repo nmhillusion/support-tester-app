@@ -5,6 +5,8 @@ import app.netlify.nmhillusion.support_tester_app.builder.MethodBuilder;
 import app.netlify.nmhillusion.support_tester_app.model.Book;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static app.netlify.nmhillusion.support_tester_app.log.LogHelper.getLog;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +39,6 @@ class ApplicationTest {
 
     @Test
     void testMain() {
-        Application.main(new String[]{"D:/projects/test-case/sample-test-case.txt", "Y"});
+        Application.main(new String[]{new File("").getAbsolutePath() + "/sample-test-case.txt", "Y"});
     }
 }

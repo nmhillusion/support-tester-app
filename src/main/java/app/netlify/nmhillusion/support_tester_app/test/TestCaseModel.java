@@ -4,6 +4,7 @@ import app.netlify.nmhillusion.support_tester_app.builder.ConstructorBuilder;
 import app.netlify.nmhillusion.support_tester_app.builder.MethodBuilder;
 import app.netlify.nmhillusion.support_tester_app.exception.BuilderException;
 import app.netlify.nmhillusion.support_tester_app.exception.IncorrectTestCaseException;
+import app.netlify.nmhillusion.support_tester_app.log.LogHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
@@ -101,6 +102,8 @@ public class TestCaseModel {
         if (stopWhenFailTestCase) {
             throwIfUnsuccessful();
         }
+
+        LogHelper.getLog(this).info(this + " --> Result: " + isSuccess());
         return this;
     }
 
