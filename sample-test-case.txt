@@ -1,4 +1,4 @@
-["app.netlify.nmhillusion.support_tester_app.model.Operator", "add", "multiply", "sum"]
-[[], [2, 3], [12, 8], [[6, 7, 8]]]
+["app.netlify.nmhillusion.support_tester_app.model.Operator", "add", "multiply", "sum", "min", "min", "subtract", "divide", "add", "multiply", "add", "add"]
+[[[5, 7]], [2, 3], [12, 8], [[6, 7, 8]], [[9, 10, 3, 23, 3, 6, 10, 4, 5, 3, 8]], [[6, 7, 4, 6, -1, 8, 9, -2]], [9, 10], [56, 7], [0, 0], [78, 2], [8, 90], [98, 2]]
 
-[null, 5, 96, 21]
+[null, 5, 96, 21, 3, -2, -1, 8, 0, 156, 98, 100]

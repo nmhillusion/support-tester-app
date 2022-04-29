@@ -2,7 +2,6 @@ package app.netlify.nmhillusion.support_tester_app;
 
 import app.netlify.nmhillusion.support_tester_app.exception.BuilderException;
 import app.netlify.nmhillusion.support_tester_app.exception.TestCaseException;
-import app.netlify.nmhillusion.support_tester_app.log.LogHelper;
 import app.netlify.nmhillusion.support_tester_app.test.TestCaseLoader;
 import app.netlify.nmhillusion.support_tester_app.test.TestCaseModel;
 import app.netlify.nmhillusion.support_tester_app.validator.StringValidator;
@@ -92,24 +91,40 @@ public class Application {
         final TestCaseModel testCaseOfInstance = testCaseModelList.get(0);
         testCaseOfInstance.executeTestCase();
 
-        for (TestCaseModel testCase : testCaseModelList) {
+        int successfulCount = testCaseOfInstance.isSuccess() ? 1 : 0;
+        int failedCount = 0;
+        final int testCaseSize = testCaseModelList.size();
+        for (int testCaseIndex = 1; testCaseIndex < testCaseSize; ++testCaseIndex) {
+            final TestCaseModel testCase = testCaseModelList.get(testCaseIndex);
             final boolean resultOfTestCase = testCase
                     .setInstance(testCaseOfInstance.getInstance())
                     .executeTestCase()
                     .isSuccess();
 
             if (!resultOfTestCase) {
-                getLog(this).error("Stop in test case: " + testCase);
+                failedCount += 1;
+                getLog(this).error("FAIL in test case: " + testCase);
+            } else {
+                successfulCount += 1;
             }
+
+            getLog(this).info("[test case status]: [PASS:$successfulCount/$testCaseSize] [FAIL:$failedCount/$testCaseSize]"
+                    .replace("$successfulCount", String.valueOf(successfulCount))
+                    .replace("$failedCount", String.valueOf(failedCount))
+                    .replace("$testCaseSize", String.valueOf(testCaseSize))
+            );
         }
 
         final boolean resultAllTestCases = testCaseModelList.parallelStream().allMatch(TestCaseModel::isSuccess);
-        getLog(this).info("[Result Test Case]: " + resultAllTestCases);
+        getLog(this).info("[ Result Test Case ]");
+        getLog(this).info("[ PASS:  %4d      ]".formatted(successfulCount));
+        getLog(this).info("[ FAIL:  %4d      ]".formatted(failedCount));
+        getLog(this).info("[ TOTAL: %4d      ]".formatted(testCaseSize));
 
         if (!resultAllTestCases) {
             getLog(this).info("List of fail test case: ");
             testCaseModelList.stream().filter(testcase -> !testcase.isSuccess()).forEach(testcase ->
-                    LogHelper.getLog(this).info("\t" + testcase)
+                    getLog(this).info("\t" + testcase)
             );
         }
     }

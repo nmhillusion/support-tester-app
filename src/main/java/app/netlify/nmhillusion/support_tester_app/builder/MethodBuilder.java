@@ -40,11 +40,7 @@ public class MethodBuilder extends Constructable {
                 method = instanceClass.getMethod(this.methodName, buildClassTypesFromArgs(args));
             } catch (Exception ex2) {
                 final List<Method> methodList = Arrays.stream(instanceClass.getMethods()).filter(m -> m.getName().equals(methodName)).toList();
-                if (1 == methodList.size()) {
-                    if (compareParameterTypesAndArgs(methodList.get(0).getParameterTypes(), args)) {
-                        method = methodList.get(0);
-                    }
-                } else {
+                if (!methodList.isEmpty()) {
                     method = lookForMethodByRelativeType(methodList, args);
                 }
             }

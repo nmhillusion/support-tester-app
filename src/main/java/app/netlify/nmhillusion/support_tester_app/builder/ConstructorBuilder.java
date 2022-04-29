@@ -33,11 +33,7 @@ public class ConstructorBuilder extends Constructable {
                 constructor = realClass.getConstructor(buildClassTypesFromArgs(args));
             } catch (Exception ex2) {
                 final List<Constructor<?>> constructorList = List.of(realClass.getConstructors());
-                if (1 == constructorList.size()) {
-                    if (compareParameterTypesAndArgs(constructorList.get(0).getParameterTypes(), args)) {
-                        constructor = constructorList.get(0);
-                    }
-                } else {
+                if (!constructorList.isEmpty()) {
                     constructor = lookForMethodByRelativeType(constructorList, args);
                 }
             }
