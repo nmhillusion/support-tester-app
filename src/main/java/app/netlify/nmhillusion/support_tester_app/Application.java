@@ -86,6 +86,8 @@ public class Application {
 //        getLog(this).debug("InputCaseList -> " + testCaseLoader.getInputCaseList());
 //        getLog(this).debug("ExpectedOutputList -> " + testCaseLoader.getExpectedOutputList());
 
+        /// Mark: START TESTING
+        final long testingStartTime = System.currentTimeMillis();
 
         final List<TestCaseModel> testCaseModelList = buildTestCaseList(realStopWhenFailTestCase);
         final TestCaseModel testCaseOfInstance = testCaseModelList.get(0);
@@ -115,11 +117,14 @@ public class Application {
             );
         }
 
+        /// Mark: END TESTING
+
         final boolean resultAllTestCases = testCaseModelList.parallelStream().allMatch(TestCaseModel::isSuccess);
-        getLog(this).info("[ Result Test Case ]");
-        getLog(this).info("[ PASS:  %4d      ]".formatted(successfulCount));
-        getLog(this).info("[ FAIL:  %4d      ]".formatted(failedCount));
-        getLog(this).info("[ TOTAL: %4d      ]".formatted(testCaseSize));
+        getLog(this).info("[   Result Test Case     ]");
+        getLog(this).info("[ PASS      :  %4d      ]".formatted(successfulCount));
+        getLog(this).info("[ FAIL      :  %4d      ]".formatted(failedCount));
+        getLog(this).info("[ TOTAL     :  %4d      ]".formatted(testCaseSize));
+        getLog(this).info("[ SPEND_TIME:  %4dms    ]".formatted(System.currentTimeMillis() - testingStartTime));
 
         if (!resultAllTestCases) {
             getLog(this).info("List of fail test case: ");

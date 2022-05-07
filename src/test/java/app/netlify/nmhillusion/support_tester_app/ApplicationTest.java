@@ -39,6 +39,7 @@ class ApplicationTest {
 
     @Test
     void testMain() {
-        Application.main(new String[]{new File("").getAbsolutePath() + "/sample-test-case.txt", "Y"});
+//        Application.main(new String[]{new File("").getAbsolutePath() + "/sample-test-case.txt", "Y"});
+        Application.main(new String[]{new File("").getAbsolutePath() + "/sample-test-case-2.txt", "Y"});
     }
 }
